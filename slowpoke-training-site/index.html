@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>야돈 트레이닝 센터 - Slowpoke Training Center</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Header -->
+    <header>
+      <h1>야돈 트레이닝 센터</h1>
+      <p>느긋하지만 확실하게 성장하는 야돈 키우기</p>
+    </header>
+
+    <!-- Nav -->
+    <nav aria-label="메인 메뉴">
+      <ul>
+        <li><a href="#home" class="active">홈</a></li>
+        <li><a href="#training">트레이닝</a></li>
+        <li><a href="#evolution">진화 단계</a></li>
+        <li><a href="#records">성장 기록</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main & Aside Grid -->
+    <div class="content-grid">
+      
+      <!-- Main Content -->
+      <main>
+        
+        <!-- Section 1. Hero -->
+        <section class="hero" id="home" aria-labelledby="hero-title">
+          <div class="hero-slowpoke-face" aria-hidden="true">(｀・ω・´)</div>
+          <h2 id="hero-title">오늘도 야돈은 천천히 강해지는 중!</h2>
+          <p>야돈을 클릭하고 돌보며 성장 포인트를 모아보세요. 움직이는 필드 위에서 야돈과 신나게 뛰어놀 수 있습니다!</p>
+          <div class="hero-buttons">
+            <a href="#training" class="btn-primary" aria-label="훈련하기 섹션으로 이동">훈련 시작하기</a>
+            <a href="#evolution" class="btn-secondary" aria-label="진화 단계 섹션으로 이동">진화 단계 보기</a>
+          </div>
+        </section>
+
+        <!-- Section 2. Interactive Character Area -->
+        <section class="character-section" aria-labelledby="character-title">
+          <h3 id="character-title">🌸 야돈과 교감하기</h3>
+          <div class="card character-interactive-card">
+            
+            <!-- 말풍선 -->
+            <div class="speech-bubble" id="speech-bubble">
+              야돈은 오늘도 멍하니 물가를 바라보고 있어요.
+            </div>
+
+            <!-- 캐릭터 클릭 플레이그라운드 (무빙 백그라운드 포함) -->
+            <div class="character-playground" id="particle-container">
+              <!-- 움직이는 배경 레이어 -->
+              <div class="bg-sky"></div>
+              <div class="bg-clouds"></div>
+              <div class="bg-ground"></div>
+              
+              <!-- 야돈 버튼 및 이미지 -->
+              <button type="button" class="character-btn" id="character-btn" aria-label="야돈 클릭하고 성장시키기">
+                <div class="pokemon-image-container" id="pokemon-container">
+                  <!-- 메인 둥근 야돈 프로필 이미지 -->
+                  <img id="pokemon-img" src="https://i1.sndcdn.com/avatars-000566440740-efgezt-t1080x1080.jpg" alt="야돈" class="pokemon-img-element">
+                  
+                  <!-- 진화 상태에 따른 장식용 데코레이션 레이어 -->
+                  <div class="evo-deco-shell" id="evo-deco-shell" aria-hidden="true">🐚</div>
+                  <div class="evo-deco-crown" id="evo-deco-crown" aria-hidden="true">👑</div>
+                </div>
+              </button>
+            </div>
+
+            <!-- 메타 정보 & 상태 정보 -->
+            <div class="status-summary-grid">
+              <div class="status-meta-item">
+                <span class="meta-label">현재 진화 단계</span>
+                <span class="meta-value" id="current-stage-name">야돈</span>
+              </div>
+              <div class="status-meta-item">
+                <span class="meta-label">성장 포인트</span>
+                <span class="meta-value" id="current-points-value">65 pt</span>
+              </div>
+              <div class="status-meta-item">
+                <span class="meta-label">클릭 횟수</span>
+                <span class="meta-value" id="click-count-value">0 회</span>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+              <div class="progress-label">
+                <span>진화 진척도</span>
+                <span id="progress-percent-label">65%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-bar-fill" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Section 3. Training Action Cards -->
+        <section class="actions-section" id="training" aria-labelledby="actions-title">
+          <h3>🏋️ 트레이닝 액션</h3>
+          <div class="actions-grid">
+            
+            <!-- 물가 산책 -->
+            <article class="card action-card">
+              <div>
+                <div class="action-icon" aria-hidden="true">🌊</div>
+                <h4 class="action-title">물가 산책</h4>
+                <p class="action-desc">야돈이 좋아하는 물가를 느릿느릿 산책하며 경험치를 얻습니다. (배경 속도 업!)</p>
+              </div>
+              <div>
+                <span class="action-reward">보상: 성장 포인트 +10</span>
+                <button type="button" class="btn-primary training-btn" data-type="walk" aria-label="물가 산책 시작하기">산책하기</button>
+              </div>
+            </article>
+
+            <!-- 맛있는 먹이 주기 -->
+            <article class="card action-card">
+              <div>
+                <div class="action-icon" aria-hidden="true">🍬</div>
+                <h4 class="action-title">맛있는 먹이 주기</h4>
+                <p class="action-desc">달콤한 먹이를 먹고 기분과 체력을 회복하며 성장합니다. (점프 모션!)</p>
+              </div>
+              <div>
+                <span class="action-reward">보상: 성장 포인트 +15</span>
+                <button type="button" class="btn-primary training-btn" data-type="feed" aria-label="맛있는 먹이 주기 시작하기">먹이 주기</button>
+              </div>
+            </article>
+
+            <!-- 낮잠 자기 -->
+            <article class="card action-card">
+              <div>
+                <div class="action-icon" aria-hidden="true">💤</div>
+                <h4 class="action-title">낮잠 자기</h4>
+                <p class="action-desc">야돈답게 충분히 낮잠을 자며 에너지를 완충합니다. (배경 천천히 정지)</p>
+              </div>
+              <div>
+                <span class="action-reward">보상: 성장 포인트 +5</span>
+                <button type="button" class="btn-primary training-btn" data-type="nap" aria-label="낮잠 재우기 시작하기">낮잠 재우기</button>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- Section 4. Evolution Roadmap -->
+        <section class="evolution-section" id="evolution" aria-labelledby="evolution-title">
+          <h3 id="evolution-title">🧬 진화 로드맵</h3>
+          <div class="evolution-flow">
+            
+            <!-- 1단계: 야돈 -->
+            <div class="evolution-card" id="evo-card-1">
+              <div class="pokemon-emoji-icon" aria-hidden="true">🌸</div>
+              <h4>야돈</h4>
+              <p>성장 포인트: 0 ~ 99</p>
+              <span class="evo-req-badge">1단계</span>
+            </div>
+
+            <div class="evolution-arrow" aria-hidden="true">➔</div>
+
+            <!-- 2단계: 야도란 -->
+            <div class="evolution-card" id="evo-card-2">
+              <div class="pokemon-emoji-icon" aria-hidden="true">🐚</div>
+              <h4>야도란</h4>
+              <p>성장 포인트: 100 ~ 199</p>
+              <span class="evo-req-badge">2단계 진화</span>
+            </div>
+
+            <div class="evolution-arrow" aria-hidden="true">➔</div>
+
+            <!-- 3단계: 야돈킹 -->
+            <div class="evolution-card" id="evo-card-3">
+              <div class="pokemon-emoji-icon" aria-hidden="true">👑</div>
+              <h4>야돈킹</h4>
+              <p>성장 포인트: 200 이상</p>
+              <span class="evo-req-badge">최종 진화</span>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+      <!-- Aside Content -->
+      <aside aria-label="보조 정보">
+        
+        <!-- 오늘의 미션 -->
+        <section class="card aside-box" aria-labelledby="mission-title">
+          <h3 id="mission-title">🎯 오늘의 미션</h3>
+          <ul class="mission-list">
+            <li class="mission-item" id="mission-click">
+              <span class="mission-checkbox" role="checkbox" aria-checked="false" aria-label="야돈 5번 클릭하기 미션"></span>
+              <span>야돈 5번 클릭하기 (<span class="mission-count">0</span>/5)</span>
+            </li>
+            <li class="mission-item" id="mission-feed">
+              <span class="mission-checkbox" role="checkbox" aria-checked="false" aria-label="먹이 1번 주기 미션"></span>
+              <span>먹이 1번 주기 (<span class="mission-count">0</span>/1)</span>
+            </li>
+            <li class="mission-item" id="mission-points">
+              <span class="mission-checkbox" role="checkbox" aria-checked="false" aria-label="성장 포인트 50점 달성하기 미션"></span>
+              <span>성장 포인트 50점 달성 (<span class="mission-count">0</span>/50)</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 트레이너 팁 -->
+        <section class="card aside-box" aria-labelledby="tips-title">
+          <h3 id="tips-title">💡 트레이너 팁</h3>
+          <div class="tip-box">
+            <p>야돈은 느리지만 꾸준히 성장합니다.</p>
+          </div>
+          <div class="tip-box">
+            <p>캐릭터 영역을 마우스로 문지르면 시점에 맞춰 배경과 캐릭터가 3D 입체 각도로 반응합니다.</p>
+          </div>
+          <div class="tip-box">
+            <p>진화 단계가 올라가면 머리에 왕관이 쓰이거나 꼬리 껍질이 더해집니다!</p>
+          </div>
+        </section>
+
+        <!-- 데이터 초기화 -->
+        <section class="card aside-box" aria-labelledby="reset-title">
+          <h3 id="reset-title">⚙️ 시스템 설정</h3>
+          <button type="button" class="btn-secondary" id="reset-btn" style="width: 100%; border-color: #EF4444; color: #EF4444;" aria-label="훈련 데이터 초기화">
+            트레이닝 정보 초기화
+          </button>
+        </section>
+
+      </aside>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 Slowpoke Training Center. Personal fan-made project for learning.</p>
+    </footer>
+
+  </div>
+
+  <!-- 진화 성공 이펙트 오버레이 -->
+  <div class="evo-celebration" id="evo-celebration" aria-hidden="true" style="display: none;">
+    <div class="evo-celebration-content">
+      <div class="evo-sparkle-icon">✨</div>
+      <h2 id="celebration-title">축하합니다!</h2>
+      <p id="celebration-subtitle">야돈이 야도란으로 진화했습니다!</p>
+      <button type="button" class="btn-primary" id="celebration-close-btn">확인</button>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

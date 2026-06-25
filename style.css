@@ -18,6 +18,12 @@ body {
     cursor: none;
 }
 
+main {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+}
+
 /* ===== Cursor Design Start ===== */
 .cursor {
     width: 40px;
@@ -64,7 +70,7 @@ body {
 
 .space_bg::after {
     content: "";
-    position: absolute;
+    position: relative;
     width: 700px;
     height: 700px;
     right: -220px;
@@ -492,9 +498,17 @@ header {
 /* === Footer Start === */
 
 .footer {
-    background-color: #BBFF00;
     padding: 40px;
     overflow: hidden;
+    position: relative;
+
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.65), transparent 18%),
+        radial-gradient(circle at 85% 15%, rgba(0, 210, 255, 0.85), transparent 24%),
+        radial-gradient(circle at 20% 90%, rgba(255, 241, 87, 0.95), transparent 26%),
+        linear-gradient(120deg, #62dfff, #fff45c, #bbff00, #78ffcf);
+    background-size: 240% 240%;
+    animation: footerGradientMove 8s ease-in-out infinite alternate;
 }
 
 .footer_inner {
@@ -559,4 +573,19 @@ header {
     display: block;
 }
 
+
 /* === Footer End === */
+
+@keyframes footerGradientMove {
+    0% {
+        background-position: 0% 40%;
+    }
+
+    50% {
+        background-position: 100% 60%;
+    }
+
+    100% {
+        background-position: 30% 100%;
+    }
+}

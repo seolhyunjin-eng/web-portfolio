@@ -1,0 +1,891 @@
+/* -----------------------------------------
+   1. 디자인 토큰 및 CSS 변수 선언
+----------------------------------------- */
+:root {
+  --color-primary-pink: #F472B6;
+  --color-primary-pink-hover: #E05A9F;
+  --color-soft-pink: #FCE7F3;
+  --color-water-blue: #93C5FD;
+  --color-soft-yellow: #FEF3C7;
+  --color-purple: #A78BFA;
+  --color-bg: #FFF7FB;
+  --color-white: #FFFFFF;
+  --color-black: #111111;
+  --color-gray: #555555;
+  --color-border: #F9A8D4;
+  --color-shadow: rgba(244, 114, 182, 0.15);
+  
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --radius-default: 16px;
+  --radius-card: 20px;
+  --radius-character: 28px;
+  --radius-pill: 999px;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* 동적 배경 & 3D 틸트용 변수 */
+  --bg-speed: 20s;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+}
+
+/* -----------------------------------------
+   2. 리셋 및 기본 설정
+----------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-black);
+  line-height: 1.6;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* -----------------------------------------
+   3. 레이아웃
+----------------------------------------- */
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 48px 0;
+}
+
+header {
+  text-align: center;
+  padding: 48px 24px;
+  background: linear-gradient(135deg, var(--color-soft-pink) 0%, #FFF1F2 100%);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 10px 25px var(--color-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '🌸';
+  position: absolute;
+  font-size: 5rem;
+  bottom: -20px;
+  left: -10px;
+  opacity: 0.15;
+  transform: rotate(-15deg);
+}
+
+header::after {
+  content: '👑';
+  position: absolute;
+  font-size: 5rem;
+  top: -10px;
+  right: -10px;
+  opacity: 0.15;
+  transform: rotate(20deg);
+}
+
+header h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--color-black);
+  margin-bottom: 12px;
+  letter-spacing: -0.03em;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: var(--color-gray);
+  font-weight: 600;
+}
+
+nav {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 6px;
+  box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+nav a {
+  display: inline-block;
+  padding: 10px 24px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-gray);
+  border-radius: var(--radius-pill);
+  transition: var(--transition-smooth);
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--color-black);
+  background-color: var(--color-soft-pink);
+}
+
+/* -----------------------------------------
+   4. 메인 콘텐츠 및 반응형 그리드
+----------------------------------------- */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 992px) {
+  .content-grid {
+    grid-template-columns: 8fr 3fr;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* -----------------------------------------
+   5. 카드 및 공통 컴포넌트
+----------------------------------------- */
+.card {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  box-shadow: 0 8px 16px var(--color-shadow);
+  transition: var(--transition-smooth);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(244, 114, 182, 0.25);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-pink);
+  color: var(--color-white);
+  border: none;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(244, 114, 182, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-pink-hover);
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(244, 114, 182, 0.6);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-white);
+  color: var(--color-primary-pink);
+  border: 2px solid var(--color-primary-pink);
+  padding: 12px 26px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-soft-pink);
+  transform: scale(1.03);
+}
+
+/* -----------------------------------------
+   6. Section 1. Hero
+----------------------------------------- */
+.hero {
+  background: linear-gradient(135deg, #FFF1F2 0%, var(--color-soft-pink) 100%);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 48px 32px;
+  text-align: center;
+  box-shadow: 0 10px 20px var(--color-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-slowpoke-face {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  animation: slowpoke-float 4s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes slowpoke-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+.hero h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: var(--color-gray);
+  max-width: 600px;
+  margin: 0 auto 32px auto;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* -----------------------------------------
+   7. Section 2. 캐릭터 교감 영역 (인터랙션 & 움직이는 배경)
+----------------------------------------- */
+.character-section h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.character-interactive-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  background-color: var(--color-white);
+  position: relative;
+}
+
+/* 말풍선 */
+.speech-bubble {
+  position: relative;
+  background-color: var(--color-soft-pink);
+  border: 2px solid var(--color-border);
+  border-radius: 16px;
+  padding: 16px 24px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-black);
+  margin-bottom: 30px;
+  max-width: 80%;
+  animation: bubble-float 3s ease-in-out infinite;
+  box-shadow: 0 4px 10px var(--color-shadow);
+  z-index: 5;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 12px 12px 0;
+  border-style: solid;
+  border-color: var(--color-soft-pink) transparent transparent;
+  display: block;
+  width: 0;
+}
+
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 13px 13px 0;
+  border-style: solid;
+  border-color: var(--color-border) transparent transparent;
+  display: block;
+  width: 0;
+  z-index: -1;
+}
+
+@keyframes bubble-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* 캐릭터 클릭 플레이그라운드 (3D 틸트 및 무빙 레이어) */
+.character-playground {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border-radius: var(--radius-character);
+  border: 3px solid var(--color-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 32px;
+  overflow: hidden;
+  user-select: none;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05), 0 10px 25px var(--color-shadow);
+  
+  /* 3D 원근법 적용 */
+  perspective: 1000px;
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: transform 0.1s ease;
+}
+
+/* 움직이는 배경 레이어 1: 하늘 그라데이션 */
+.bg-sky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65%;
+  background: linear-gradient(180deg, #BAE6FD 0%, #E0F2FE 100%);
+  z-index: 1;
+}
+
+/* 움직이는 배경 레이어 2: 흐르는 구름 패턴 */
+.bg-clouds {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  width: 200%;
+  height: 30%;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.5) 0px,
+    rgba(255, 255, 255, 0.5) 40px,
+    transparent 40px,
+    transparent 120px
+  );
+  z-index: 2;
+  animation: slideBg var(--bg-speed) linear infinite;
+  border-radius: 999px;
+  opacity: 0.7;
+}
+
+/* 움직이는 배경 레이어 3: 흐르는 지면 패턴 */
+.bg-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 35%;
+  background: repeating-linear-gradient(
+    45deg,
+    #FBCFE8 0px,
+    #FBCFE8 20px,
+    #F9A8D4 20px,
+    #F9A8D4 40px
+  );
+  border-top: 4px solid var(--color-primary-pink);
+  z-index: 3;
+  animation: slideBg calc(var(--bg-speed) / 2) linear infinite;
+}
+
+@keyframes slideBg {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.character-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+}
+
+.pokemon-image-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.pokemon-img-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid var(--color-white);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: character-idle 4s ease-in-out infinite;
+  transition: filter 0.5s ease;
+}
+
+/* 진화 전용 머리/꼬리 오버레이 데코레이션 */
+.evo-deco-shell,
+.evo-deco-crown {
+  position: absolute;
+  font-size: 3rem;
+  z-index: 10;
+  display: none;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  animation: deco-bounce 2s ease-in-out infinite alternate;
+}
+
+/* 야도란의 꼬리 껍질 데코레이션 (오른쪽 아래 배치) */
+.evo-deco-shell {
+  bottom: -10px;
+  right: -10px;
+}
+
+/* 야돈킹의 셀러 왕관 데코레이션 (머리 위 중앙 배치) */
+.evo-deco-crown {
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3.5rem;
+}
+
+@keyframes deco-bounce {
+  0% { transform: translateY(0) scale(1) rotate(0deg); }
+  100% { transform: translateY(-5px) scale(1.05) rotate(5deg); }
+}
+
+/* 야돈킹(3단계) 진화 시 이미지 발광 필터 */
+.pokemon-img-element.stage3-aura {
+  filter: drop-shadow(0 0 15px var(--color-primary-pink)) saturate(1.2);
+  border-color: var(--color-primary-pink);
+}
+
+/* 기본 캐릭터 위아래 둥실거림 */
+@keyframes character-idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 클릭 바운스 모션 */
+.bounce-animation {
+  animation: character-bounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
+}
+
+@keyframes character-bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(0.8, 1.2) translateY(-25px); }
+  50% { transform: scale(1.1, 0.9) translateY(0); }
+  75% { transform: scale(0.95, 1.05); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* 훈련 위글 모션 */
+.wiggle-animation {
+  animation: character-wiggle 0.4s ease-in-out forwards !important;
+}
+
+@keyframes character-wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg) scale(1.1); }
+  75% { transform: rotate(8deg) scale(1.1); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* 파티클 이펙트 */
+.click-particle {
+  position: absolute;
+  pointer-events: none;
+  font-size: 1.6rem;
+  z-index: 10;
+  animation: particle-float 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* 상태 수치 메타 */
+.status-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.status-meta-item {
+  background-color: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-default);
+  padding: 12px;
+  text-align: center;
+}
+
+.meta-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-gray);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.meta-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-black);
+}
+
+/* Progress Bar */
+.progress-container {
+  width: 100%;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.progress-bar-bg {
+  background-color: var(--color-soft-pink);
+  border-radius: var(--radius-pill);
+  height: 22px;
+  overflow: hidden;
+  border: 2px solid var(--color-border);
+}
+
+.progress-bar-fill {
+  background: linear-gradient(90deg, var(--color-primary-pink) 0%, var(--color-purple) 100%);
+  height: 100%;
+  border-radius: var(--radius-pill);
+  width: 0%;
+  transition: width 0.4s ease-out;
+}
+
+/* -----------------------------------------
+   8. Section 3. 트레이닝 카드 영역
+----------------------------------------- */
+.actions-section h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .actions-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.action-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.action-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.action-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.action-desc {
+  font-size: 0.95rem;
+  color: var(--color-gray);
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.action-reward {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: var(--color-soft-pink);
+  color: var(--color-primary-pink);
+  padding: 4px 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 20px;
+  border: 1px solid var(--color-border);
+}
+
+.action-card button {
+  width: 100%;
+}
+
+/* -----------------------------------------
+   9. Section 4. 진화 로드맵
+----------------------------------------- */
+.evolution-section h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.evolution-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (min-width: 992px) {
+  .evolution-flow {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+}
+
+.evolution-card {
+  flex: 1;
+  width: 100%;
+  text-align: center;
+  padding: 32px 20px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-white);
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.evolution-card.active {
+  border-color: var(--color-primary-pink);
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.4);
+  background: linear-gradient(180deg, var(--color-white) 0%, #FFF1F2 100%);
+  transform: scale(1.04);
+}
+
+.evolution-card.active::before {
+  content: '현재 단계';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-purple);
+  color: var(--color-white);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.evolution-card .pokemon-emoji-icon {
+  font-size: 4.5rem;
+  margin-bottom: 12px;
+}
+
+.evolution-card h4 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.evolution-card p {
+  font-size: 0.9rem;
+  color: var(--color-gray);
+  margin-bottom: 12px;
+}
+
+.evo-req-badge {
+  display: inline-block;
+  background-color: var(--color-soft-pink);
+  color: var(--color-primary-pink);
+  padding: 4px 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: var(--radius-pill);
+}
+
+.evolution-arrow {
+  font-size: 2rem;
+  color: var(--color-primary-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 991px) {
+  .evolution-arrow {
+    transform: rotate(90deg);
+    margin: 8px 0;
+  }
+}
+
+/* -----------------------------------------
+   10. Aside (우측 사이드바)
+----------------------------------------- */
+aside {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.aside-box h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.mission-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mission-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.mission-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid var(--color-primary-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.mission-item.completed .mission-checkbox::after {
+  content: '✓';
+  color: var(--color-primary-pink);
+  font-size: 0.95rem;
+  font-weight: 900;
+}
+
+.mission-item.completed span {
+  text-decoration: line-through;
+  color: var(--color-gray);
+}
+
+.tip-box {
+  background-color: var(--color-soft-pink);
+  border-left: 4px solid var(--color-primary-pink);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.tip-box p {
+  font-size: 0.95rem;
+  color: var(--color-gray);
+  font-weight: 600;
+}
+
+/* -----------------------------------------
+   11. 진화 성공 모달창 (Overlay)
+----------------------------------------- */
+.evo-celebration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(17, 17, 17, 0.7);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(8px);
+}
+
+.evo-celebration-content {
+  background-color: var(--color-white);
+  border: 3px solid var(--color-primary-pink);
+  border-radius: var(--radius-card);
+  padding: 40px;
+  text-align: center;
+  max-width: 450px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: modal-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes modal-pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.evo-sparkle-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  animation: slowpoke-float 2s ease-in-out infinite;
+}
+
+.evo-celebration-content h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.evo-celebration-content p {
+  font-size: 1.1rem;
+  color: var(--color-gray);
+  margin-bottom: 24px;
+}
+
+/* -----------------------------------------
+   12. Footer
+----------------------------------------- */
+footer {
+  text-align: center;
+  padding: 32px 16px;
+  margin-top: 48px;
+  border-top: 2px solid var(--color-border);
+  color: var(--color-gray);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
